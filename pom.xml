@@ -1,0 +1,64 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.khh</groupId>
+  <artifactId>lucene-solr</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>lucene-solr Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+
+
+  <dependencies>
+
+    <!-- Lucene 依赖包开始 -->
+    <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-core -->
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-core</artifactId>
+      <version>6.4.2</version>
+    </dependency>
+
+
+    <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-analyzers-common -->
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-analyzers-common</artifactId>
+      <version>6.4.2</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-queryparser -->
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-queryparser</artifactId>
+      <version>6.4.2</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.4</version>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.janeluo/ikanalyzer -->
+    <dependency>
+      <groupId>com.janeluo</groupId>
+      <artifactId>ikanalyzer</artifactId>
+      <version>2012_u6</version>
+    </dependency>
+    <!-- Lucene 依赖包结束 -->
+
+
+  </dependencies>
+
+    <build>
+    <finalName>lucene-solr</finalName>
+  </build>
+</project>

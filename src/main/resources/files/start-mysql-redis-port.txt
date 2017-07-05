@@ -1,0 +1,8 @@
+firewall-cmd --add-port=3306/tcp
+firewall-cmd --add-port=6379/tcp
+firewall-cmd --add-port=16379/tcp
+firewall-cmd --add-port=6380/tcp
+firewall-cmd --add-port=16380/tcp
+firewall-cmd --add-port=6381/tcp
+firewall-cmd --add-port=16381/tcp
+firewall-cmd --list-ports

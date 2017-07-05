@@ -1,0 +1,272 @@
+insert into city(city_name,create_date) values('GuangDong','2014-06-04'),('ShanDong','2014-06-05'),('XinJiang','2014-06-06'),('ShanXi','2014-06-07'),('TianJin','2014-06-08'),('ZheJiang','2014-06-09'),('HuNan','2014-06-10');
+
+create or replace view city_view as
+select id as view_id,city_name as view_name from city where id <10
+with check option;
+
+
+create or replace view city_view1 as
+select view_id, view_name from city_view where view_id > 1
+with local check option;
+
+create or replace view city_view2 as
+select view_id, view_name from city_view where view_id > 1
+with  cascaded check option;
+
+
+-------------------------------------------------------------------------------
+
+delimiter $$
+
+create procedure pro_city_find(in city_id int,out name varchar(50)) 
+begin 
+	select city_name  into name from city 
+	where id=city_id ;
+
+	
+end 
+$$
+
+delimiter ;
+
+
+call pro_city_find(1,@A);
+
+select @A;
+
+-------------------------------------------------------------------------------
+
+
+show procedure status like 'pro_city_find ' \G
+
+show create procedure pro_city_find \G
+
+
+-------------------------------------------------------------------------------
+
+--插入学生姓名后，再插入时间
+
+drop table if exists student;
+drop table if exists student_of_tri;
+
+create table student(
+id int primary key auto_increment,
+name varchar(50)
+);
+
+create table student_of_tri(
+id int primary key auto_increment,
+date timestamp
+);
+
+delimiter $$
+--触发器
+create trigger student_tri
+after insert on student for each row 
+begin
+	insert into student_of_tri(date) values(now());
+end
+$$
+
+delimiter ;
+
+insert into student(name) values('aaa'),('bbb');
+
+select * from student;
+select * from student_of_tri;
+
+
+-------------------------------------------------------------------------------
+
+
+create table test1(
+id int primary key auto_increment,
+name varchar(50) not null,
+last_update timestamp	
+);
+
+
+--写一个循环插入test1的存储函数
+
+delimiter $$
+
+create procedure cycle_insert_test(in time int)
+begin
+	declare x int default 0;
+	while x<time do
+	insert into test1(name,last_update) values(concat('sb启育',x),now());
+	set x=x+1;
+	end while;
+end
+$$
+delimiter ;
+
+call cycle_insert_test(10);
+
+
+
+
+mysqld --verbose --help|grep key_buffer_size=--key_buffer_size=# The size of the buffer used for index blocks for MyISAM
+
+
+
+
+
+
+
+
+
+
+
+
+
+select * from customer;
+select * from orders;
+select * from orderid;
+
+
+
+-------------------------------------------------------------------------------
+
+create table Message(
+message_id varchar(32) primary key,
+title varchar(20),
+create_time timestamp,
+text text,
+category varchar(10)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+create table files(
+file_id varchar(32) primary key,
+file_name varchar(32),
+file_category varchar(10),
+upload_time timestamp,
+folder varchar(20)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+create table person(
+person_id varchar(32) primary key,
+person_name varchar(20),
+email varchar(20),
+phone varchar(20)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+create table Question(
+question_id varchar(32) primary key,
+category varchar(10),
+title varchar(20),
+answer varchar(100),
+problem varchar(100),
+create_time timestamp,
+p_id varchar(32),
+constraint qp_id foreign key (p_id) references person (person_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+create index messageid on message (message_id);
+create index filesid on files (file_id);
+create index personid on person(person_id);
+create index questionid on question(question_id);
+
+--------------------------------------------------------------------------
+
+
+
+
+
+create table student(
+student_id varchar(16) primary key,
+student_name varchar(15),
+password varchar(6),
+email varchar(30),
+create_time timestamp,
+state int(1)
+);
+
+create table course(
+course_id varchar(16) primary key,
+course_name varchar(15),
+summary varchar(50),
+cover_path varchar(100),
+assessment_method int
+);
+
+create table stucourse(
+student_id varchar(16),
+course_id  varchar(16),
+primary key(student_id,course_id)
+);
+
+
+
+单选题（tb_radio_ques）
+radio_ques_id					//单选题id
+content						//题目描述
+provide_options		//单选题会提供出答案选项
+//(存放json格式的字符串）
+//例如：{“A”:”xx”;”B”:”yy”;”C”:”zz”;”D”:”kk”}
+  
+ask_img						//题目图片路径
+mark						//分数
+result						//题目答案		例如：A
+question_lib_id				//题库id     题目与题库是多对一的关系
+
+多选题（tb_mutiple_ques）
+mutiple_ques_id					//单选题id
+content						//题目描述
+provide_options		//多选题会提供出答案选项
+//(存放json格式的字符串）
+//例如：{“A”:”xx”;”B”:”yy”;”C”:”zz”;”D”:”kk”}
+  
+ask_img						//题目图片路径
+mark						//分数
+result						//题目答案		例如：A,B,C
+question_lib_id				//题库id     题目与题库是多对一的关系
+判断题（tb_judgment_ques）
+judgment_ques_id					//单选题id
+content						//题目描述
+provide_options		//单选题会提供出答案选项
+//(存放json格式的字符串）
+//例如：{“0”:”xx”;”1”:”yy”}
+  
+ask_img						//题目图片路径
+mark						//分数
+result						//题目答案		例如：0或者1
+question_lib_id				//题库id     题目与题库是多对一的关系
+
+
+
+简答题（tb_short_ques）
+short_ques_id					//单选题id
+content						//题目描述  
+ask_img						//题目图片路径
+mark						//分数
+result						//题目答案		
+question_lib_id				//题库id     题目与题库是多对一的关系
+
+
+
+ select *
+    from t_student
+    where id=1
+      and activate_code=991320
+      and (code_create_time + 60000000) > now()
+
+
+
+
+
+
+
+
+select
+    g.id as id, g.name as name,g.price as price, g.promotinal_price as promotinal_price, g.num as num, g.description as description, g.create_time as create_time,
+    g.pictures as pictures, g.postFree as postFree,g.state as state, g.shop_id as shop_id, g.category_id as category_id, g.is_valid as is_valid
+	,s.id as s_shop_id , s.shop_name as s_shop_name,s.address as s_shop_address
+
+    from t_goods g,t_shop s, t_category c
+    where g.is_valid = 1 and s.is_valid = 1 and g.shop_id = '4689f3d9dfc04eba9e80cf0fa487981e' and  s.id = g.shop_id
+
+
+	order by g.create_time ASC limit 0,5
+

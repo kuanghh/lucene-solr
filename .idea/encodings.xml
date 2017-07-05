@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/resources/files/java.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/files/readme.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/files/sql.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/files/演示列子.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/files/西西软件园.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/files/要学的知识.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/files/视频无声教学.txt" charset="GBK" />
+  </component>
+</project>
